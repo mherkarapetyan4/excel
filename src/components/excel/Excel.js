@@ -1,8 +1,8 @@
-import {$} from '@core/dom';
-import {Emitter} from '@core/Emitter';
-import {StoreSubscriber} from '@core/StoreSubscriber';
-import {updateDate} from '@/store/actions';
-import {preventDefault} from '@core/utils';
+import {$} from '@core/dom'
+import {Emitter} from '@core/Emitter'
+import {StoreSubscriber} from '@core/StoreSubscriber'
+import {updateDate} from '@/redux/actions'
+import {preventDefault} from '@core/utils'
 
 export class Excel {
   constructor(options) {
@@ -14,10 +14,12 @@ export class Excel {
 
   getRoot() {
     const $root = $.create('div', 'excel')
+
     const componentOptions = {
       emitter: this.emitter,
       store: this.store
     }
+
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className)
       const component = new Component($el, componentOptions)

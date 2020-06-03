@@ -1,6 +1,7 @@
-export function createStore(rootReducer, initialState) {
+export function createStore(rootReducer, initialState = {}) {
   let state = rootReducer({...initialState}, {type: '__INIT__'})
   let listeners = []
+
   return {
     subscribe(fn) {
       listeners.push(fn)
@@ -17,6 +18,7 @@ export function createStore(rootReducer, initialState) {
     getState() {
       return JSON.parse(JSON.stringify(state))
     }
-
   }
 }
+
+// Extra Task - Переписать на класс

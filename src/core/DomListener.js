@@ -1,11 +1,10 @@
-import {capitalize} from '@core/utils';
+import {capitalize} from '@core/utils'
 
 export class DomListener {
   constructor($root, listeners = []) {
     if (!$root) {
-      throw new Error(`You need to specify $root element`)
+      throw new Error(`No $root provided for DomListener!`)
     }
-
     this.$root = $root
     this.listeners = listeners
   }
@@ -14,12 +13,13 @@ export class DomListener {
     this.listeners.forEach(listener => {
       const method = getMethodName(listener)
       if (!this[method]) {
-        throw new Error(`***
-          Method ${method} is
-          defined in listeners, but not implemented on ${this.name} Component
-        `)
+        const name = this.name || ''
+        throw new Error(
+            `Method ${method} is not implemented in ${name} Component`
+        )
       }
       this[method] = this[method].bind(this)
+      // Тоже самое что и addEventListener
       this.$root.on(listener, this[method])
     })
   }
@@ -32,6 +32,9 @@ export class DomListener {
   }
 }
 
+// input => onInput
 function getMethodName(eventName) {
   return 'on' + capitalize(eventName)
 }
+
+

@@ -1,8 +1,8 @@
 export const defaultStyles = {
   textAlign: 'left',
   fontWeight: 'normal',
-  fontStyle: 'normal',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  fontStyle: 'normal'
 }
 
-export const defaultTitle = 'Նոր շիթ'
+export const defaultTitle = 'Новая таблица'
